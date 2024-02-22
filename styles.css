@@ -1,0 +1,37 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #686868;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    border: 20px solid black;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.drawing-board-container {
+    width: calc(30px*16);
+    height: calc(30px*16);
+    border: 2px solid hotpink;
+}
+
+.row {
+    height: 30px;
+    /* width: 30px; */
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.pixel {
+    height: 30px;
+    width: 30px;
+    border: 1px solid rgb(255, 255, 255);
+    box-sizing: border-box;
+    display: flex;
+}
