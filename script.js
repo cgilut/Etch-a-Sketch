@@ -19,4 +19,4 @@ function createGrid(gridSize) {
     }
 };
 
-createGrid(16);
+createGrid(8);
