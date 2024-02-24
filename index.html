@@ -7,7 +7,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="drawing-board-container">
+    <header>
+        Etch-a-Sketch
+    </header>
+
+    <div class="main-container">
+            <div class="main-container__controls">
+                <input type="color" class="colorPicker">
+                <button class="button" id="buttonColor">Color mode</button>
+                <button class="button" id="buttonRainbow">Rainbow mode</button>
+                <button class="button" id="buttonEraser">Eraser</button>
+                <button class="button" id="buttonReset">Reset</button>
+            </div>
+        <div class="main-container__drawing-board"></div>
     </div>
 
 <script src="script.js"></script>

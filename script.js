@@ -1,7 +1,8 @@
 "use strict"
 
 
-const drawingBoardDiv = document.querySelector('.drawing-board-container')
+const drawingBoardDiv = 
+    document.querySelector('.main-container__drawing-board')
 
 function createGrid(gridSize) {
     for (let i = 0; i <= gridSize - 1; i++) {

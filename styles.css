@@ -1,12 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 html {
     height: 100%;
 }
 
 body {
     background-color: #686868;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-height: 100%;
     border: 20px solid black;
     margin: 0;
@@ -14,14 +16,55 @@ body {
     box-sizing: border-box;
 }
 
-.drawing-board-container {
-    width: calc(30px*16);
-    height: calc(30px*16);
+header {
+    text-align: center;
+    font-size: 4rem;
+    border: 2px solid red;
+    padding: 50px 0;
+}
+
+.main-container {
+    border: 2px solid aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.main-container__controls {
+    border: 2px solid blue;
+    max-width: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.colorPicker {
+    width: 100px;
+    height: 100px;
+    border: none;
+}
+
+.button {
+    width: inherit;
+    height: 40px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+}
+
+.main-container__drawing-board {
+    width: 500px;
+    height: 500px;
     border: 2px solid hotpink;
     display: flex;
     flex-direction: column;
-    /* flex: 1; */
 }
+
 
 .row {
     /* height: 30px; */
