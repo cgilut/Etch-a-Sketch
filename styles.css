@@ -64,14 +64,13 @@ header {
     height: 40px;
     border: 2px solid #000000;
     border-radius: 5px;
-    box-shadow: 3px 3px 4px rgba(0,0,0,0.1) inset,
-                3px 3px 10px rgba(0,0,0,0.2) inset;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1) inset,
+        3px 3px 10px rgba(0, 0, 0, 0.2) inset;
     transition: transform 100ms ease-in-out;
 }
 
 .controlButton:hover {
-    box-shadow: 3px 3px 4px rgba(0,0,0,0.1),
-                3px 3px 10px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1), 3px 3px 10px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
     background-color: greenyellow;
     cursor: pointer;
@@ -95,7 +94,7 @@ header {
     flex-direction: column;
     background-color: #fff;
     border: 1px solid #000000;
-    box-shadow: 0 0 12px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 12px 10px rgba(0, 0, 0, 0.2);
 }
 
 .row {
@@ -106,7 +105,7 @@ header {
 }
 
 .pixel {
-    /* border: 1px solid rgb(255, 255, 255); */
+    border: 1px solid rgb(161, 31, 31);
     box-sizing: border-box;
     display: flex;
     flex: 1;
