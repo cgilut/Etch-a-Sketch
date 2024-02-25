@@ -48,6 +48,7 @@ header {
 .colorPicker {
     width: 100px;
     height: 100px;
+    /* border: none; */
     border: 2px solid black;
     transition: transform 100ms ease-in-out;
 }
@@ -55,10 +56,10 @@ header {
 .colorPicker:hover {
     transform: scale(1.1);
     cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #000;
+    box-shadow: 0px 0px 5px 1px rgb(0, 0, 0, 0.5);
 }
 
-.button {
+.controlButton {
     width: inherit;
     height: 40px;
     border: 2px solid #000000;
@@ -68,12 +69,18 @@ header {
     transition: transform 100ms ease-in-out;
 }
 
-.button:hover {
+.controlButton:hover {
     box-shadow: 3px 3px 4px rgba(0,0,0,0.1),
                 3px 3px 10px rgba(0,0,0,0.2);
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: greenyellow;
     cursor: pointer;
+}
+
+.controlButton.active {
+    background-color: rgb(63, 63, 63);
+    border: 2px solid #fff;
+    color: #fff;
 }
 
 .main-container__drawing-board {

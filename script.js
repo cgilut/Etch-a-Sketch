@@ -1,8 +1,8 @@
 "use strict"
 
-
-const drawingBoardDiv = 
-    document.querySelector('.main-container__drawing-board')
+const controlButtons = document.querySelectorAll('.controlButton')
+const drawingBoardDiv = document.querySelector('.main-container__drawing-board')
+let isActive = false
 
 function createGrid(gridSize) {
     for (let i = 0; i <= gridSize - 1; i++) {
@@ -21,3 +21,24 @@ function createGrid(gridSize) {
 };
 
 createGrid(8);
+
+controlButtons.forEach(button => {
+
+    button.addEventListener('click', whenButtonClicked);
+
+});
+
+function whenButtonClicked() {
+
+    controlButtons.forEach(button => {
+        button.classList.remove('active'); // Remove .active class from all buttons
+    });
+
+    let selectedMode = document.getElementById(`${this.id}`)
+
+    if (this.id !== 'buttonReset') {
+        selectedMode.classList.add('active')
+    }
+}
+
+qwe
