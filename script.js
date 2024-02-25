@@ -4,6 +4,8 @@ const controlButtons = document.querySelectorAll('.controlButton')
 const drawingBoardDiv = document.querySelector('.main-container__drawing-board')
 const colorPicker = document.getElementById('colorPicker')
 const buttonColor = document.getElementById('buttonColor')
+const gridSizeText = document.querySelector('.gridSize');
+const gridSizeSlider = document.querySelector('.gridSizeSlider');
 let isActive = false
 
 function createGrid(gridSize) {
@@ -20,7 +22,7 @@ function createGrid(gridSize) {
             rowDiv.appendChild(newDiv)
         }
     }
-    
+
 };
 
 createGrid(8);
@@ -57,4 +59,10 @@ colorPicker.addEventListener('click', () => {
 
 });
 
+function updateGridSizeText() {
+    gridSizeText.textContent = `${gridSizeSlider.value} x ${gridSizeSlider.value}`;
+}
 
+gridSizeSlider.addEventListener('input', updateGridSizeText);
+
+updateGridSizeText();
