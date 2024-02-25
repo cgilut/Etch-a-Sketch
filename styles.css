@@ -45,7 +45,7 @@ header {
     gap: 30px;
 }
 
-.colorPicker {
+#colorPicker {
     width: 100px;
     height: 100px;
     /* border: none; */
@@ -53,8 +53,8 @@ header {
     transition: transform 100ms ease-in-out;
 }
 
-.colorPicker:hover {
-    transform: scale(1.1);
+#colorPicker:hover {
+    transform: scale(1.05);
     cursor: pointer;
     box-shadow: 0px 0px 5px 1px rgb(0, 0, 0, 0.5);
 }
@@ -81,6 +81,10 @@ header {
     background-color: rgb(63, 63, 63);
     border: 2px solid #fff;
     color: #fff;
+}
+
+.gridSize {
+    font-size: 2rem;
 }
 
 .main-container__drawing-board {
