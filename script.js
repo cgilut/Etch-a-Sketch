@@ -5,6 +5,7 @@ const drawingBoardDiv = document.querySelector(
     ".main-container__drawing-board"
 );
 const colorPicker = document.getElementById("colorPicker");
+// const pixel = document.querySelector(".pixel");
 const buttonColor = document.getElementById("buttonColor");
 const gridSizeText = document.querySelector(".gridSize");
 const gridSizeSlider = document.querySelector(".gridSizeSlider");
@@ -26,6 +27,17 @@ function createGrid(gridSize) {
             rowDiv.appendChild(newDiv);
         }
     }
+    const pixels = document.querySelectorAll(".pixel");
+    pixels.forEach((pixel) => {
+        pixel.addEventListener("click", handleColorChange);
+        pixel.addEventListener("mousemove", handleColorChange);
+    });
+
+    function handleColorChange() {
+        const selectedColor = colorPicker.value;
+        document.documentElement.style.setProperty("--pixel", selectedColor);
+        this.style.backgroundColor = selectedColor;
+    }
 }
 
 controlButtons.forEach((button) => {
@@ -34,7 +46,7 @@ controlButtons.forEach((button) => {
 
 function whenButtonClicked() {
     controlButtons.forEach((button) => {
-        button.classList.remove("active"); // Remove .active class from all buttons
+        button.classList.remove("active");
     });
 
     let selectedMode = document.getElementById(`${this.id}`);
@@ -43,16 +55,26 @@ function whenButtonClicked() {
         selectedMode.classList.add("active");
     }
 
+    colorPicker.addEventListener("change", chooseColor);
+
+    function chooseColor(e) {
+        console.log(e.target.value);
+    }
+
+    // let sketchMode = null;
+
+    if (this.id == "buttonColor") {
+    } else if (this.id == "buttonRainbow") {
+        sketchMode = "rainbow";
+        console.log(sketchMode);
+    } else if (this.id == "buttonEraser") {
+        sketchMode = "erase";
+        console.log(sketchMode);
+    }
     // 1. Depending on the ID of the button clicked set mode to coloring/rainbow/eraser
     // 2. If ID is #buttonReset set every pixel to default color
     // 3 .If ID is #buttonColor then get color of #colorPicker and addEventListener
     //    to the grid to change the color of a pixel when the mouse is clicked/dragged
-}
-
-colorPicker.addEventListener("change", chooseColor);
-
-function chooseColor(e) {
-    console.log(e.target.value);
 }
 
 colorPicker.addEventListener("click", () => {
@@ -74,3 +96,5 @@ gridSizeSlider.addEventListener("input", () => {
 
 updateGridSizeText();
 createGrid(gridSizeSlider.value);
+
+// const pixel = document.querySelector(".pixel");
