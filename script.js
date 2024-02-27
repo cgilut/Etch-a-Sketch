@@ -27,16 +27,33 @@ function createGrid(gridSize) {
             rowDiv.appendChild(newDiv);
         }
     }
+
     const pixels = document.querySelectorAll(".pixel");
+    let isMouseDown = false;
+
     pixels.forEach((pixel) => {
         pixel.addEventListener("click", handleColorChange);
-        pixel.addEventListener("mousemove", handleColorChange);
+
+        drawingBoardDiv.addEventListener("mousedown", (event) => {
+            event.preventDefault();
+            isMouseDown = true;
+            pixel.addEventListener("mousemove", handleColorChange);
+        });
+        document.addEventListener("mouseup", () => {
+            isMouseDown = false;
+            pixel.removeEventListener("mousemove", handleColorChange);
+        });
     });
 
     function handleColorChange() {
-        const selectedColor = colorPicker.value;
-        document.documentElement.style.setProperty("--pixel", selectedColor);
-        this.style.backgroundColor = selectedColor;
+        if (isMouseDown) {
+            const selectedColor = colorPicker.value;
+            document.documentElement.style.setProperty(
+                "--pixel",
+                selectedColor
+            );
+            this.style.backgroundColor = selectedColor;
+        }
     }
 }
 
