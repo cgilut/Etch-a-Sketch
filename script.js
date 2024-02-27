@@ -5,12 +5,12 @@ const drawingBoardDiv = document.querySelector(
     ".main-container__drawing-board"
 );
 const colorPicker = document.getElementById("colorPicker");
-// const pixel = document.querySelector(".pixel");
 const buttonColor = document.getElementById("buttonColor");
 const gridSizeText = document.querySelector(".gridSize");
 const gridSizeSlider = document.querySelector(".gridSizeSlider");
 
 function createGrid(gridSize) {
+    // deletes everything in the grid to avoid overlaping of pixels
     while (drawingBoardDiv.firstChild) {
         drawingBoardDiv.removeChild(drawingBoardDiv.firstChild);
     }
@@ -30,16 +30,21 @@ function createGrid(gridSize) {
 
     const pixels = document.querySelectorAll(".pixel");
     let isMouseDown = false;
+    let sketchMode = "color";
 
     pixels.forEach((pixel) => {
         pixel.addEventListener("click", handleColorChange);
 
+        // allows drawing only when clicking and dragging mouse across
+        // the screen while the mouse button is held down
         drawingBoardDiv.addEventListener("mousedown", (event) => {
-            event.preventDefault();
+            event.preventDefault(); // prevents default drag-and-drop default behavior
             isMouseDown = true;
             pixel.addEventListener("mousemove", handleColorChange);
         });
+
         document.addEventListener("mouseup", () => {
+            // stop drawing when mouse button is released
             isMouseDown = false;
             pixel.removeEventListener("mousemove", handleColorChange);
         });
@@ -55,6 +60,17 @@ function createGrid(gridSize) {
             this.style.backgroundColor = selectedColor;
         }
     }
+
+    function handleErasing() {
+        if (isMouseDown) {
+            const selectedColor = "#ffffff";
+            document.documentElement.style.setProperty(
+                "--pixel",
+                selectedColor
+            );
+            this.style.backgroundColor = selectedColor;
+        }
+    }
 }
 
 controlButtons.forEach((button) => {
@@ -63,6 +79,7 @@ controlButtons.forEach((button) => {
 
 function whenButtonClicked() {
     controlButtons.forEach((button) => {
+        // ensure only one button is active at a time
         button.classList.remove("active");
     });
 
@@ -78,9 +95,11 @@ function whenButtonClicked() {
         console.log(e.target.value);
     }
 
-    // let sketchMode = null;
+    let sketchMode = null;
 
     if (this.id == "buttonColor") {
+        sketchMode = "color";
+        console.log(sketchMode);
     } else if (this.id == "buttonRainbow") {
         sketchMode = "rainbow";
         console.log(sketchMode);
@@ -96,7 +115,9 @@ function whenButtonClicked() {
 
 colorPicker.addEventListener("click", () => {
     controlButtons.forEach((button) => {
-        button.classList.remove("active"); // Remove .active class from all buttons
+        // ensure only one button is active at a time
+        // again, because colorPicker is not in the controlButtons class
+        button.classList.remove("active");
     });
 
     buttonColor.classList.add("active");
@@ -113,5 +134,3 @@ gridSizeSlider.addEventListener("input", () => {
 
 updateGridSizeText();
 createGrid(gridSizeSlider.value);
-
-// const pixel = document.querySelector(".pixel");
