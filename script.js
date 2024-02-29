@@ -67,10 +67,11 @@ function handlePixelClick(event) {
         let rainbowIndex = 0;
 
         drawingBoardDiv.addEventListener("mousedown", () => {
+            event.preventDefault();
             drawingBoardDiv.addEventListener("mouseover", colorPixel);
         });
 
-        drawingBoardDiv.addEventListener("mouseup", () => {
+        document.body.addEventListener("mouseup", () => {
             drawingBoardDiv.removeEventListener("mouseover", colorPixel);
         });
 
@@ -111,7 +112,7 @@ drawingBoardDiv.addEventListener("mousedown", (event) => {
     drawingBoardDiv.addEventListener("mouseover", handlePixelClick);
 });
 
-drawingBoardDiv.addEventListener("mouseup", () => {
+document.body.addEventListener("mouseup", () => {
     drawingBoardDiv.removeEventListener("mouseover", handlePixelClick);
 });
 
