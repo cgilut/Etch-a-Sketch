@@ -39,19 +39,13 @@ function whenButtonClicked(event) {
         button.classList.remove("active");
     });
     event.target.classList.add("active");
-    // if (event.target.id !== "buttonReset") {
-    //     event.target.classList.add("active");
-    // }
 
     if (event.target.id === "buttonColor") {
         sketchMode = "color";
-        console.log(sketchMode);
     } else if (event.target.id === "buttonRainbow") {
         sketchMode = "rainbow";
-        console.log(sketchMode);
     } else if (event.target.id === "buttonEraser") {
         sketchMode = "erase";
-        console.log(sketchMode);
     }
 }
 
@@ -61,7 +55,29 @@ function handlePixelClick(event) {
     } else if (sketchMode === "erase") {
         event.target.style.backgroundColor = "#fff";
     } else if (sketchMode === "rainbow") {
-        // rainbow mode code
+        const rainbowColors = [
+            "#FF0000",
+            "#FF7F00",
+            "#FFFF00",
+            "#00FF00",
+            "#0000FF",
+            "#4B0082",
+            "#9400D3",
+        ];
+        let rainbowIndex = 0;
+
+        drawingBoardDiv.addEventListener("mousedown", () => {
+            drawingBoardDiv.addEventListener("mouseover", colorPixel);
+        });
+
+        drawingBoardDiv.addEventListener("mouseup", () => {
+            drawingBoardDiv.removeEventListener("mouseover", colorPixel);
+        });
+
+        function colorPixel(event) {
+            event.target.style.backgroundColor = rainbowColors[rainbowIndex];
+            rainbowIndex = (rainbowIndex + 1) % rainbowColors.length;
+        }
     }
 }
 
@@ -78,7 +94,6 @@ colorPicker.addEventListener("click", () => {
 
     sketchMode = "color";
     buttonColor.classList.add("active");
-    console.log(sketchMode);
 });
 
 buttonReset.addEventListener("click", () => {
