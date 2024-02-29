@@ -63,7 +63,8 @@ header {
     box-shadow: 0px 0px 5px 1px rgb(0, 0, 0, 0.5);
 }
 
-.controlButton {
+.controlButton,
+#buttonReset {
     width: inherit;
     height: 40px;
     border: 2px solid #000000;
@@ -73,7 +74,8 @@ header {
     transition: transform 100ms ease-in-out;
 }
 
-.controlButton:hover {
+.controlButton:hover,
+#buttonReset:hover {
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.1), 3px 3px 10px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
     background-color: greenyellow;

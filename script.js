@@ -8,12 +8,13 @@ const colorPicker = document.getElementById("colorPicker");
 const buttonColor = document.getElementById("buttonColor");
 const gridSizeText = document.querySelector(".gridSize");
 const gridSizeSlider = document.querySelector(".gridSizeSlider");
+const buttonReset = document.getElementById("buttonReset");
+
+let sketchMode = "color";
 
 function createGrid(gridSize) {
-    // deletes everything in the grid to avoid overlaping of pixels
-    while (drawingBoardDiv.firstChild) {
-        drawingBoardDiv.removeChild(drawingBoardDiv.firstChild);
-    }
+    // deletes everything in the grid to avoid overlapping of pixels
+    drawingBoardDiv.innerHTML = "";
 
     for (let i = 0; i <= gridSize - 1; i++) {
         const newDiv = document.createElement("div");
@@ -27,49 +28,40 @@ function createGrid(gridSize) {
             rowDiv.appendChild(newDiv);
         }
     }
+}
 
-    const pixels = document.querySelectorAll(".pixel");
-    let isMouseDown = false;
-    let sketchMode = "color";
+function updateGridSizeText() {
+    gridSizeText.textContent = `${gridSizeSlider.value} x ${gridSizeSlider.value}`;
+}
 
-    pixels.forEach((pixel) => {
-        pixel.addEventListener("click", handleColorChange);
-
-        // allows drawing only when clicking and dragging mouse across
-        // the screen while the mouse button is held down
-        drawingBoardDiv.addEventListener("mousedown", (event) => {
-            event.preventDefault(); // prevents default drag-and-drop default behavior
-            isMouseDown = true;
-            pixel.addEventListener("mousemove", handleColorChange);
-        });
-
-        document.addEventListener("mouseup", () => {
-            // stop drawing when mouse button is released
-            isMouseDown = false;
-            pixel.removeEventListener("mousemove", handleColorChange);
-        });
+function whenButtonClicked(event) {
+    controlButtons.forEach((button) => {
+        button.classList.remove("active");
     });
+    event.target.classList.add("active");
+    // if (event.target.id !== "buttonReset") {
+    //     event.target.classList.add("active");
+    // }
 
-    function handleColorChange() {
-        if (isMouseDown) {
-            const selectedColor = colorPicker.value;
-            document.documentElement.style.setProperty(
-                "--pixel",
-                selectedColor
-            );
-            this.style.backgroundColor = selectedColor;
-        }
+    if (event.target.id === "buttonColor") {
+        sketchMode = "color";
+        console.log(sketchMode);
+    } else if (event.target.id === "buttonRainbow") {
+        sketchMode = "rainbow";
+        console.log(sketchMode);
+    } else if (event.target.id === "buttonEraser") {
+        sketchMode = "erase";
+        console.log(sketchMode);
     }
+}
 
-    function handleErasing() {
-        if (isMouseDown) {
-            const selectedColor = "#ffffff";
-            document.documentElement.style.setProperty(
-                "--pixel",
-                selectedColor
-            );
-            this.style.backgroundColor = selectedColor;
-        }
+function handlePixelClick(event) {
+    if (sketchMode === "color") {
+        event.target.style.backgroundColor = colorPicker.value;
+    } else if (sketchMode === "erase") {
+        event.target.style.backgroundColor = "#fff";
+    } else if (sketchMode === "rainbow") {
+        // rainbow mode code
     }
 }
 
@@ -77,59 +69,35 @@ controlButtons.forEach((button) => {
     button.addEventListener("click", whenButtonClicked);
 });
 
-function whenButtonClicked() {
-    controlButtons.forEach((button) => {
-        // ensure only one button is active at a time
-        button.classList.remove("active");
-    });
-
-    let selectedMode = document.getElementById(`${this.id}`);
-
-    if (this.id !== "buttonReset") {
-        selectedMode.classList.add("active");
-    }
-
-    colorPicker.addEventListener("change", chooseColor);
-
-    function chooseColor(e) {
-        console.log(e.target.value);
-    }
-
-    let sketchMode = null;
-
-    if (this.id == "buttonColor") {
-        sketchMode = "color";
-        console.log(sketchMode);
-    } else if (this.id == "buttonRainbow") {
-        sketchMode = "rainbow";
-        console.log(sketchMode);
-    } else if (this.id == "buttonEraser") {
-        sketchMode = "erase";
-        console.log(sketchMode);
-    }
-    // 1. Depending on the ID of the button clicked set mode to coloring/rainbow/eraser
-    // 2. If ID is #buttonReset set every pixel to default color
-    // 3 .If ID is #buttonColor then get color of #colorPicker and addEventListener
-    //    to the grid to change the color of a pixel when the mouse is clicked/dragged
-}
-
 colorPicker.addEventListener("click", () => {
     controlButtons.forEach((button) => {
         // ensure only one button is active at a time
-        // again, because colorPicker is not in the controlButtons class
+        // because colorPicker is not in the controlButtons class
         button.classList.remove("active");
     });
 
+    sketchMode = "color";
     buttonColor.classList.add("active");
+    console.log(sketchMode);
 });
 
-function updateGridSizeText() {
-    gridSizeText.textContent = `${gridSizeSlider.value} x ${gridSizeSlider.value}`;
-}
+buttonReset.addEventListener("click", () => {
+    createGrid(gridSizeSlider.value);
+});
 
 gridSizeSlider.addEventListener("input", () => {
     updateGridSizeText(gridSizeSlider.value);
     createGrid(gridSizeSlider.value);
+});
+
+drawingBoardDiv.addEventListener("mousedown", (event) => {
+    event.preventDefault();
+    handlePixelClick(event);
+    drawingBoardDiv.addEventListener("mouseover", handlePixelClick);
+});
+
+drawingBoardDiv.addEventListener("mouseup", () => {
+    drawingBoardDiv.removeEventListener("mouseover", handlePixelClick);
 });
 
 updateGridSizeText();
