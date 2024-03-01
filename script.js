@@ -11,6 +11,7 @@ const gridSizeSlider = document.querySelector(".gridSizeSlider");
 const buttonReset = document.getElementById("buttonReset");
 
 let sketchMode = "color";
+let rainbowIndex = 0;
 
 function createGrid(gridSize) {
     // deletes everything in the grid to avoid overlapping of pixels
@@ -64,21 +65,9 @@ function handlePixelClick(event) {
             "#4B0082",
             "#9400D3",
         ];
-        let rainbowIndex = 0;
 
-        drawingBoardDiv.addEventListener("mousedown", () => {
-            event.preventDefault();
-            drawingBoardDiv.addEventListener("mouseover", colorPixel);
-        });
-
-        document.body.addEventListener("mouseup", () => {
-            drawingBoardDiv.removeEventListener("mouseover", colorPixel);
-        });
-
-        function colorPixel(event) {
-            event.target.style.backgroundColor = rainbowColors[rainbowIndex];
-            rainbowIndex = (rainbowIndex + 1) % rainbowColors.length;
-        }
+        event.target.style.backgroundColor = rainbowColors[rainbowIndex];
+        rainbowIndex = (rainbowIndex + 1) % rainbowColors.length;
     }
 }
 
